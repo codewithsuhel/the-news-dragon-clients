@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 import { Card, Col, Row } from "react-bootstrap";
 import first from '../../../assets/1.png'
 import second from '../../../assets/2.png'
 import third from '../../../assets/3.png'
 
-const EditorsInsight = () => {
-  return (
-    <Row xs={1} md={2} lg={3} className="g-4 mt-4">
+const LeftInsight = () => {
+    return (
+        <Row xs={1} md={1} lg={1} className="g-4 mt-4">
       
         <Col>
           <Card>
@@ -51,7 +51,7 @@ const EditorsInsight = () => {
         </Col>
       
     </Row>
-  );
+    );
 };
 
-export default EditorsInsight;
+export default LeftInsight;

@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Card } from "react-bootstrap";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link, useLoaderData } from "react-router-dom";
+import EditorsInsight from "../EditorsInsight/EditorsInsight";
 
 
 const News = () => {
@@ -10,7 +11,8 @@ const News = () => {
     const { title, details, image_url, category_id } = news;
 
   return (
-    <Card>
+      <div>
+        <Card>
       <Card.Img variant="top" src={image_url} />
       <Card.Body>
         <Card.Title>{title}</Card.Title>
@@ -21,6 +23,8 @@ const News = () => {
             <Button variant="danger"> <FaArrowLeft></FaArrowLeft> All News in this category</Button></Link>
       </Card.Body>
     </Card>
+    <EditorsInsight></EditorsInsight>
+      </div>
   );
 };
 
