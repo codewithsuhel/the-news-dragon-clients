@@ -1,12 +1,53 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { getAuth } from "firebase/auth";
+import app from "../../../firebase/firebase.config";
+import { AuthContext } from "../../../providers/AuthProvider";
+
+
 
 const Register = () => {
+    const [error, setError] = useState('');
+    const {createUser} = useContext(AuthContext);
+
+
+    const handleRegister = event =>{
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password =  form.password.value;
+        const confirm =  form.confirm.value;
+        console.log(email, password, confirm);
+
+        setError('');
+
+
+        if(password !== confirm){
+            setError('Your password did not match');
+            return;
+        }
+        else if( password.length < 6){
+            setError('Please provide must be 6 characters or longer')
+            return;
+        }
+        
+        createUser(email, password)
+        .then(result =>{
+            const loggedUser = result.user;
+            console.log(loggedUser);
+            form.reset();
+        })
+        .catch(error=>{
+            console.log(error);
+            setError(error.message);
+        })
+
+    }
   return (
     <Container className=" w-50 mx-auto border p-5 shadow">
-      <h2 className="mb-4">Please Login</h2>
-      <Form>
+      <h2 className="mb-4">Register your account</h2>
+      <Form onSubmit={handleRegister}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -22,7 +63,6 @@ const Register = () => {
             type="text"
             name="photo"
             placeholder="Your photo url"
-            required
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -48,8 +88,8 @@ const Register = () => {
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type="password"
-            name="password"
-            placeholder="Enter your password"
+            name="confirm"
+            placeholder="Enter your confirm password"
             required
           />
         </Form.Group>
@@ -65,8 +105,10 @@ const Register = () => {
         <Form.Text className="text-secondary">
           Already Have An Account ? <Link to="/login">Login</Link>
         </Form.Text>
+        <br />
         <Form.Text className="text-success"></Form.Text>
-        <Form.Text className="text-danger"></Form.Text>
+        <Form.Text className="text-danger">{error}</Form.Text>
+
       </Form>
     </Container>
   );
