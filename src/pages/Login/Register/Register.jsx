@@ -1,49 +1,50 @@
 import React, { useContext, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { getAuth } from "firebase/auth";
-import app from "../../../firebase/firebase.config";
 import { AuthContext } from "../../../providers/AuthProvider";
 
-
-
 const Register = () => {
-    const [error, setError] = useState('');
-    const {createUser} = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const { createUser } = useContext(AuthContext);
+  const [accepted, setAccepted] = useState(false);
 
 
-    const handleRegister = event =>{
-        event.preventDefault();
-        const form = event.target;
-        const email = form.email.value;
-        const password =  form.password.value;
-        const confirm =  form.confirm.value;
-        console.log(email, password, confirm);
+  const handleRegister = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const photo = form.photo.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirm = form.confirm.value;
+    // console.log(email, password, confirm);
+    setError("");
 
-        setError('');
-
-
-        if(password !== confirm){
-            setError('Your password did not match');
-            return;
-        }
-        else if( password.length < 6){
-            setError('Please provide must be 6 characters or longer')
-            return;
-        }
-        
-        createUser(email, password)
-        .then(result =>{
-            const loggedUser = result.user;
-            console.log(loggedUser);
-            form.reset();
-        })
-        .catch(error=>{
-            console.log(error);
-            setError(error.message);
-        })
-
+    if (password !== confirm) {
+      setError("Your password did not match");
+      return;
+    } else if (password.length < 6) {
+      setError("Please provide must be 6 characters or longer");
+      return;
     }
+
+    createUser(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        // console.log(loggedUser);
+        form.reset();
+      })
+      .catch((error) => {
+        // console.log(error);
+        setError(error.message);
+      });
+  };
+
+  const handleAccepted = event =>{
+      setAccepted(event.target.checked);
+
+  }
+
   return (
     <Container className=" w-50 mx-auto border p-5 shadow">
       <h2 className="mb-4">Register your account</h2>
@@ -59,11 +60,7 @@ const Register = () => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Photo URL</Form.Label>
-          <Form.Control
-            type="text"
-            name="photo"
-            placeholder="Your photo url"
-          />
+          <Form.Control type="text" name="photo" placeholder="Your photo url" />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
@@ -94,10 +91,13 @@ const Register = () => {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Accept Term & Conditions" />
-      </Form.Group>
+          <Form.Check
+          onClick={handleAccepted} 
+          type="checkbox" 
+          label={<>Accept <Link to="/terms">Terms and Conditions</Link></>}/>
+        </Form.Group>
         <Form.Group>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" disabled={!accepted} type="submit">
             Register
           </Button>
         </Form.Group>
@@ -108,7 +108,6 @@ const Register = () => {
         <br />
         <Form.Text className="text-success"></Form.Text>
         <Form.Text className="text-danger">{error}</Form.Text>
-
       </Form>
     </Container>
   );

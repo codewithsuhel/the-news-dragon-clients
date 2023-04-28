@@ -1,18 +1,25 @@
 import React, { useContext, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 
 const Login = () => {
     const [error, setError] = useState(null);
-    const {logIn}= useContext(AuthContext)
+    const {logIn}= useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    // console.log(location);
+    const from = location.state?.from?.pathname || '/category/0';
+  
     const handleLogin = event =>{
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password =  form.password.value;
         console.log(email, password);
-        setError('')
+        setError('');
+        navigate(from, {replace: true});
+
 
         logIn(email, password)
         .then(result =>{
