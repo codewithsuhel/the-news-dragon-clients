@@ -1,6 +1,5 @@
 import React from 'react';
 import { useLoaderData, useParams } from 'react-router-dom';
-import News from '../../News/News/News';
 import NewsCard from '../NewsCard/NewsCard';
 
 const Category = () => {

@@ -12,11 +12,9 @@ const EditorsInsight = () => {
           <Card>
             <Card.Img variant="top" src={first} />
             <Card.Body>
-              <Card.Title>Card title</Card.Title>
+              <Card.Title>Biden Pledges Nearly $3 Billion </Card.Title>
               <Card.Text>
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias velit accusamus dignissimos excepturi cum illo.
               </Card.Text>
             </Card.Body>
           </Card>
@@ -26,11 +24,9 @@ const EditorsInsight = () => {
           <Card>
             <Card.Img variant="top" src={second} />
             <Card.Body>
-              <Card.Title>Card title</Card.Title>
+              <Card.Title>Biden Pledges Nearly $3 Billion</Card.Title>
               <Card.Text>
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias velit accusamus dignissimos excepturi cum illo.
               </Card.Text>
             </Card.Body>
           </Card>
@@ -40,11 +36,9 @@ const EditorsInsight = () => {
           <Card>
             <Card.Img variant="top" src={third} />
             <Card.Body>
-              <Card.Title>Card title</Card.Title>
+              <Card.Title>U.S. announces largest weapons package</Card.Title>
               <Card.Text>
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias velit accusamus dignissimos excepturi cum illo.
               </Card.Text>
             </Card.Body>
           </Card>
